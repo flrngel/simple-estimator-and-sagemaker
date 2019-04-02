@@ -34,7 +34,9 @@ if __name__ =='__main__':
 
     # load data from keras
     train, test = tf.keras.datasets.mnist.load_data()
+
     train_x, train_y = train
+    train_x = np.array(train_x, dtype=np.float32)
     train_y = tf.keras.utils.to_categorical(train_y, 10)
 
     estimator.train(input_fn=lambda:model.input_fn(train_x, train_y, args.epochs, args.batch_size))

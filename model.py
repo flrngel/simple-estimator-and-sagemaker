@@ -3,7 +3,7 @@ import tensorflow as tf
 # https://medium.com/tensorflow/multi-gpu-training-with-estimators-tf-keras-and-tf-data-ba584c3134db
 def input_fn(images, labels, epochs, batch_size):
     # Convert the inputs to a Dataset. (E)
-    ds = tf.data.Dataset.from_tensor_slices((tf.cast(images, tf.float32), labels))
+    ds = tf.data.Dataset.from_tensor_slices((images, labels))
     # Shuffle, repeat, and batch the examples. (T)
     SHUFFLE_SIZE = 5000
     ds = ds.shuffle(SHUFFLE_SIZE).repeat(epochs).batch(batch_size)
