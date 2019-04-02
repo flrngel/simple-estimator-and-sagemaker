@@ -17,6 +17,7 @@ if __name__ =='__main__':
     parser.add_argument('--model_dir', type=str)
     parser.add_argument('--train', type=str, default=os.environ.get('SM_CHANNEL_TRAIN'))
     parser.add_argument('--test', type=str, default=os.environ.get('SM_CHANNEL_TEST'))
+    parser.add_argument('--debug', type=bool, default=False)
 
     args, _ = parser.parse_known_args()
 
@@ -27,6 +28,9 @@ if __name__ =='__main__':
                 'label_size': 10
                 }
             )
+
+    if args.debug == True:
+        tf.logging.set_verbosity(tf.logging.INFO)
 
     # load data from keras
     train, test = tf.keras.datasets.mnist.load_data()
