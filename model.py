@@ -13,12 +13,19 @@ def input_fn(images, labels, epochs, batch_size):
     return ds
 
 def model_fn(features, labels, mode, params):
-    net = tf.layers.dense(features, params['hidden_h1'], activation=tf.nn.relu)
+    inputs = tf.reshape(features, [-1, 28*28])
+
+    net = tf.layers.dense(inputs, params['hidden_h1'], activation=tf.nn.relu)
     logits = tf.layers.dense(net, params['label_size'], activation=tf.nn.sigmoid)
-    loss = tf.nn.softmax_cross_entropy_with_logits_v2(labels=labels, logits=logits)
+
+    loss = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits_v2(labels=labels, logits=logits))
     
-    optimizer = tf.train.AdagradOptimizer(learning_rate=params['learning_rate'])
+    optimizer = tf.train.AdamOptimizer(learning_rate=params['learning_rate'])
     train_op = optimizer.minimize(loss, global_step=tf.train.get_global_step())
 
+    accuracy = tf.metrics.accuracy(labels=tf.argmax(labels,1), predictions=tf.argmax(logits,1))
+    logging_hook = tf.train.LoggingTensorHook({"loss" : loss, 'accuracy': accuracy[1]}, every_n_iter=100)
+    eval_metric_ops = {"accuracy": accuracy}
+
     # https://www.tensorflow.org/api_docs/python/tf/estimator/EstimatorSpec
-    return tf.estimator.EstimatorSpec(mode, loss=loss, train_op=train_op, predictions=logits)
+    return tf.estimator.EstimatorSpec(mode, loss=loss, train_op=train_op, predictions=logits, training_hooks=[logging_hook], eval_metric_ops=eval_metric_ops)
