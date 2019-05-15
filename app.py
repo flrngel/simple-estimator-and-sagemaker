@@ -3,6 +3,7 @@ import argparse
 import tensorflow as tf
 import model
 import numpy as np
+#import sagemaker
 
 if __name__ =='__main__':
     parser = argparse.ArgumentParser()
@@ -22,6 +23,7 @@ if __name__ =='__main__':
     args, _ = parser.parse_known_args()
 
     estimator = tf.estimator.Estimator(model_fn=model.model_fn,
+            model_dir=args.model_dir,
             params={
                 'learning_rate': args.learning_rate,
                 'hidden_h1': args.hidden_h1,
@@ -40,3 +42,4 @@ if __name__ =='__main__':
     train_y = tf.keras.utils.to_categorical(train_y, 10)
 
     estimator.train(input_fn=lambda:model.input_fn(train_x, train_y, args.epochs, args.batch_size))
+    estimator.export_savedmodel('saved_model', model.serving_input_fn)
