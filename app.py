@@ -42,4 +42,6 @@ if __name__ =='__main__':
     train_y = tf.keras.utils.to_categorical(train_y, 10)
 
     estimator.train(input_fn=lambda:model.input_fn(train_x, train_y, args.epochs, args.batch_size))
-    estimator.export_savedmodel('saved_model', model.serving_input_fn)
+
+    # exporting model
+    estimator.export_savedmodel('saved_model', model.serving_input_receiver_fn)
