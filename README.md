@@ -1,6 +1,6 @@
 # simple-estimator-and-sagemaker 👋
 
-> Simple guide to use tf.estimator and deploy to AWS SageMaker
+> Simple guide to use tf.estimator and deploy to AWS SageMaker (after training with your GPU)
 
 ## Usage
 
