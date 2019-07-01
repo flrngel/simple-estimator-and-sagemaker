@@ -9,7 +9,7 @@
 $ make && make test
 # upload your model
 $ tar cvzf model.tar.gz saved_model/<MODEL_VERSION>/
-$ aws cp model.tar.gz s3://<AWS_BUCKET>/<S3_MODEL_PATH>
+$ aws s3 cp model.tar.gz s3://<AWS_BUCKET>/<S3_MODEL_PATH>
 # change AWS variables before run this
 $ python sagemaker_deploy.py
 $ python sagemaker_inference.py
