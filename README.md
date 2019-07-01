@@ -1,6 +1,4 @@
-<h1 align="center">Welcome to simple-estimator-and-sagemaker 👋</h1>
-<p>
-</p>
+# simple-estimator-and-sagemaker 👋
 
 > Simple guide to use tf.estimator and deploy to AWS SageMaker
 
@@ -19,10 +17,4 @@ $ python sagemaker_inference.py
 
 ## Author
 
-👤 **flrngel**
-
-* Github: [@flrngel](https://github.com/flrngel)
-
-## Show your support
-
-Give a ⭐️ if this project helped you!
+[@flrngel](https://github.com/flrngel)
