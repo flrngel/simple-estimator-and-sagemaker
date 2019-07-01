@@ -17,5 +17,5 @@ $ python sagemaker_inference.py
 
 ## Author
 
-[@flrngel](https://github.com/flrngel)
-[@jun85664396](https://github.com/jun85664396)
+- [@flrngel](https://github.com/flrngel)
+- [@jun85664396](https://github.com/jun85664396)
