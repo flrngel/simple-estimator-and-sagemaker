@@ -1,4 +1,3 @@
-from PIL import Image
 import numpy as np
 import tensorflow as tf
 
@@ -13,11 +12,8 @@ def _bytes_feature(value):
     return tf.train.Feature(bytes_list=tf.train.BytesList(value=[value]))
     #return value
 
-def load_image( infilename ) :
-    #img = Image.open( infilename )
-    #img.load()
-    #data = np.asarray(img, dtype="int32")
-    data = tf.read_file(infilename)
+def load_image(filename) :
+    data = tf.read_file(filename)
     return data
 
 def save_image( npdata, outfilename ) :
@@ -37,4 +33,5 @@ def serialize_example(image):
     example_proto = tf.train.Example(features=tf.train.Features(feature=feature))
     return example_proto.SerializeToString()
 
-save_image(serialize_example(load_image('./sexy.jpg')), 'sexy.npy')
+if __name__ == "__main__":
+    save_image(serialize_example(load_image('./test.jpg')), 'test.npy')
