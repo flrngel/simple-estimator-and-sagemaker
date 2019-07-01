@@ -10,7 +10,7 @@ client = boto3.client('sagemaker-runtime')
 endpoint_name = "<SageMaker_Endpoint>"
 content_type = "application/json"
 
-b64 = base64.b64encode(serialize_example(load_image('./misc/sexy.jpg')))
+b64 = base64.b64encode(serialize_example(load_image('./misc/test.jpg')))
 payload = {
     'inputs': {
         "images": [{
