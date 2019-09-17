@@ -22,13 +22,20 @@ if __name__ =='__main__':
 
     args, _ = parser.parse_known_args()
 
+    if args.num_gpus > 0:
+        strategy = tf.contrib.distribute.MirroredStrategy(num_gpus=args.num_gpus)
+        config = tf.estimator.RunConfig(train_distribute=strategy)
+    else:
+        config = tf.estimator.RunConfig()
+
     estimator = tf.estimator.Estimator(model_fn=model.model_fn,
             model_dir=args.model_dir,
             params={
                 'learning_rate': args.learning_rate,
                 'hidden_h1': args.hidden_h1,
                 'label_size': 10
-                }
+                },
+            config=config
             )
 
     if args.debug == True:
