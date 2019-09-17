@@ -18,7 +18,7 @@ if __name__ =='__main__':
     parser.add_argument('--model_dir', type=str)
     parser.add_argument('--train', type=str, default=os.environ.get('SM_CHANNEL_TRAIN'))
     parser.add_argument('--test', type=str, default=os.environ.get('SM_CHANNEL_TEST'))
-    parser.add_argument('--debug', type=bool, default=False)
+    parser.add_argument('--num_gpus', type=int, default=1)
 
     args, _ = parser.parse_known_args()
 
